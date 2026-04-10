@@ -2,8 +2,12 @@
 name = "cuda-a2a"
 version = "0.1.0"
 edition = "2021"
-description = "Agent-to-Agent protocol — deliberative messaging with confidence propagation, trust scoring, and fleet coordination"
+description = "Agent-to-Agent protocol — messages, intents, priorities, trust, inbox"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/Lucineer/cuda-a2a"
+readme = "README.md"
+keywords = ["ai", "fleet", "agent", "rust"]
+categories = ["science"]
 
 [dependencies]
 serde = { version = "1", features = ["derive"] }
-serde_json = "1"
