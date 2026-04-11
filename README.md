@@ -1,50 +1,86 @@
 # cuda-a2a
 
-**Agent-to-Agent communication protocol for the Lucineer fleet.**
+Agent-to-Agent protocol — deliberative messaging with confidence propagation, trust scoring, fleet routing (Rust)
 
-> Agents don't work alone. They negotiate, share, warn, and coordinate.
-> A2A is the nervous system of the fleet.
+Part of the Cocapn fleet — a Lucineer vessel component.
 
-## Message Types (12 Intents)
+## What It Does
 
-- `Query` / `Response` - Information exchange
-- `Request` / `Offer` / `Accept` / `Reject` - Negotiation
-- `Inform` / `Warn` / `Command` - Coordination
-- `Apologize` / `Thank` - Social bonding
+### Key Types
 
-## Key Components
+- `A2AMessage` — core data structure
+- `TrustScore` — core data structure
+- `Inbox` — core data structure
+- `FleetRouter` — core data structure
 
-- **`A2AMessage`** - Structured message with sender, intent, payload, priority, confidence
-- **`TrustScore`** - Per-agent trust tracking with exponential decay
-- **`Inbox`** - Priority queue with deduplication and TTL
-- **`FleetRouter`** - Routes messages based on capabilities and trust
-- **`fuse_confidence()`** - Bayesian confidence propagation across agents
+## Quick Start
 
-## How Confidence Flows Through A2A
+```bash
+# Clone
+git clone https://github.com/Lucineer/cuda-a2a.git
+cd cuda-a2a
 
-1. Agent A sends a message with confidence 0.8
-2. Agent B's inbox receives it and checks sender trust (0.7)
-3. Effective confidence = harmonic_mean(0.8, 0.7) = 0.369
-4. Agent B processes only if effective confidence exceeds threshold
-5. Agent B's response carries its own confidence, fused with the request
+# Build
+cargo build
 
-## Ecosystem Integration
+# Run tests
+cargo test
+```
 
-- `cuda-equipment` - FleetMessage base type
-- `cuda-trust` - TrustScore integrated with multi-context trust
-- `cuda-communication` - Higher-level conversation threading
-- `cuda-fleet-mesh` - Network topology for message routing
-- `cuda-deliberation` - A2A messages carry proposals
-- `cuda-compliance` - Policy rules filter A2A messages
-- `cuda-did` - DID-based agent identity verification
+## Usage
 
-## See Also
+```rust
+use cuda_a2a::*;
 
-- [cuda-communication](https://github.com/Lucineer/cuda-communication) - Natural language layer
-- [cuda-trust](https://github.com/Lucineer/cuda-trust) - Multi-context trust
-- [cuda-fleet-mesh](https://github.com/Lucineer/cuda-fleet-mesh) - Fleet network topology
-- [cuda-did](https://github.com/Lucineer/cuda-did) - Decentralized identity
+// See src/lib.rs for full API
+// 15 unit tests included
+```
+
+### Available Implementations
+
+- `Intent` — see source for methods
+- `TrustScore` — see source for methods
+- `Inbox` — see source for methods
+- `FleetRouter` — see source for methods
+
+## Testing
+
+```bash
+cargo test
+```
+
+15 unit tests covering core functionality.
+
+## Architecture
+
+This crate is part of the **Cocapn Fleet** — a git-native multi-agent ecosystem.
+
+- **Category**: other
+- **Language**: Rust
+- **Dependencies**: See `Cargo.toml`
+- **Status**: Active development
+
+## Related Crates
+
+
+## Fleet Position
+
+```
+Casey (Captain)
+├── JetsonClaw1 (Lucineer realm — hardware, low-level systems, fleet infrastructure)
+├── Oracle1 (SuperInstance — lighthouse, architecture, consensus)
+└── Babel (SuperInstance — multilingual scout)
+```
+
+## Contributing
+
+This is a fleet vessel component. Fork it, improve it, push a bottle to `message-in-a-bottle/for-jetsonclaw1/`.
 
 ## License
 
-MIT OR Apache-2.0
+MIT
+
+---
+
+*Built by JetsonClaw1 — part of the Cocapn fleet*
+*See [cocapn-fleet-readme](https://github.com/Lucineer/cocapn-fleet-readme) for the full fleet roadmap*
